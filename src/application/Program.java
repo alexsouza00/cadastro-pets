@@ -1,11 +1,14 @@
+import utils.FileManager;
+
 import java.util.Scanner;
 
-public class Main {
-   static Scanner input = new Scanner(System.in);
+public class Program {
+    static Scanner input = new Scanner(System.in);
+    static FileManager fileManager = new FileManager();
 
     public static void main(String[] args) throws InterruptedException {
 
-    menu();
+        menu();
 
     }
 
@@ -23,6 +26,7 @@ public class Main {
 
         switch (option) {
             case 1:
+                System.out.println(fileManager.formularyRead().toString());
                 break;
             case 2:
                 break;
