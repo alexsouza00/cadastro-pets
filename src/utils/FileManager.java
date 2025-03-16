@@ -1,14 +1,17 @@
 package utils;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FileManager {
 
     String formularyPath = "C:\\javar\\cadastro-pets\\src\\files\\formulario.txt";
 
-    public String formularyRead() {
+    public List<String> formularyRead() {
 
-        StringBuilder formulary = new StringBuilder();
+        StringBuilder formularyBd = new StringBuilder();
+        List<String> formulary = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(formularyPath))) {
 
@@ -16,9 +19,10 @@ public class FileManager {
 
             while (line != null) {
 
-                formulary.append(line).append("\n");
+                formulary.add(line);
 
                 line = br.readLine();
+
             }
 
         } catch (IOException e) {
@@ -27,7 +31,7 @@ public class FileManager {
 
         }
 
-        return formulary.toString();
+        return formulary;
 
     }
 }
