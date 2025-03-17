@@ -1,0 +1,7 @@
+1 - shake shake
+2 - DOG
+3 - MALE
+4 - 11
+5 - 19.0
+6 - 4.0
+7 - vira lata

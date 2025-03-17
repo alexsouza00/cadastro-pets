@@ -89,11 +89,11 @@ public class PetService {
 
                 return new Pet(name, PetType.valueOf(petType), PetSex.valueOf(petSex), petAdress, petAge, petWeight, petBreed);
 
-
             } catch (PetRegisterExceptions e) {
                 System.out.println(e.getMessage());
                 System.out.println("tente novamente: ");
             }
+
         }
     }
 }

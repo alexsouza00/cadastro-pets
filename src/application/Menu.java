@@ -21,6 +21,7 @@ public class Menu {
                     PetService petService = new PetService();
                     FileManager fileManager = new FileManager();
                     fileManager.registerPetsInfo(petService.register());
+                    menu();
                     break;
                 case 2:
                     break;
