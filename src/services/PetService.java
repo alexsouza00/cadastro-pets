@@ -1,6 +1,8 @@
 package services;
 
 import entities.Pet;
+import entities.enums.PetSex;
+import entities.enums.PetType;
 import exceptions.PetRegisterExceptions;
 import utils.FileManager;
 
@@ -10,7 +12,7 @@ import static application.Program.input;
 
 public class PetService {
 
-    public void register() {
+    public Pet register() {
         while (true) {
             try {
                 FileManager fileManager = new FileManager();
@@ -85,8 +87,9 @@ public class PetService {
                     throw new PetRegisterExceptions("Raça invalida!");
                 }
 
+                return new Pet(name, PetType.valueOf(petType), PetSex.valueOf(petSex), petAdress, petAge, petWeight, petBreed);
 
-                break;
+
             } catch (PetRegisterExceptions e) {
                 System.out.println(e.getMessage());
                 System.out.println("tente novamente: ");

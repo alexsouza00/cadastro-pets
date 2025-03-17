@@ -1,5 +1,7 @@
 package application;
+
 import services.PetService;
+import utils.FileManager;
 
 import static application.Program.input;
 
@@ -12,28 +14,33 @@ public class Menu {
         int option = input.nextInt();
         input.nextLine();
 
-        switch (option) {
-            case 1:
-                PetService petService = new PetService();
-                petService.register();
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                input.close();
-                break;
-            default:
-                System.out.println("Selecione uma opção valida!");
-                Thread.sleep(3000);
-                System.out.println("");
-                System.out.println("-----------------------------");
-                menu();
+        while (true) {
+
+            switch (option) {
+                case 1:
+                    PetService petService = new PetService();
+                    FileManager fileManager = new FileManager();
+                    fileManager.registerPetsInfo(petService.register());
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    input.close();
+                    break;
+                default:
+                    System.out.println("Selecione uma opção valida!");
+                    Thread.sleep(3000);
+                    System.out.println("");
+                    System.out.println("-----------------------------");
+                    menu();
+            }
         }
+
     }
 }

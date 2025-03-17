@@ -1,0 +1,7 @@
+1 - luna luna
+2 - CAT
+3 - FEMALE
+4 - 11
+5 - 5.0
+6 - 4.0
+7 - vira lata
