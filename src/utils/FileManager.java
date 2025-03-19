@@ -3,8 +3,11 @@ package utils;
 import entities.Pet;
 
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class FileManager {
 
@@ -39,10 +42,18 @@ public class FileManager {
 
     public void registerPetsInfo(Pet pet) {
 
-        String registerPetsPath = "C:\\javar\\cadastro-pets\\src\\files\\petsCadastrados\\" + pet.getName() + ".txt";
+        LocalDateTime date = LocalDateTime.now();
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("[yyyyMMdd'T'HHmm");
+        String dateString = date.format(fmt);
+
+
+        String registerPetsPath = "C:\\javar\\cadastro-pets\\src\\files\\petsCadastrados\\"
+                + dateString
+                + "-"
+                + pet.getName().toUpperCase().replaceAll("\\s+", "")
+                + ".txt";
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(registerPetsPath))) {
-
 
             bw.write("1 - " + pet.getName() + "\n");
             bw.write("2 - " + pet.getPetType() + "\n");
@@ -51,6 +62,7 @@ public class FileManager {
             bw.write("5 - " + pet.getAge() + "\n");
             bw.write("6 - " + pet.getPetWeight() + "\n");
             bw.write("7 - " + pet.getPetBreed() + "\n");
+
         } catch (Exception e) {
 
             System.out.println("Error " + e.getMessage());

@@ -6,11 +6,9 @@ import entities.enums.PetType;
 import exceptions.PetRegisterExceptions;
 import utils.FileManager;
 
-import java.util.regex.PatternSyntaxException;
-
 import static application.Program.input;
 
-public class PetService {
+public class PetRegisterService {
 
     public Pet register() {
         while (true) {
