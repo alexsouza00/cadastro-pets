@@ -8,9 +8,9 @@ import java.util.List;
 
 public class FileManager {
 
-    String formularyPath = "C:\\javar\\cadastro-pets\\src\\files\\formulario.txt";
 
     public List<String> formularyRead() {
+        String formularyPath = "C:\\javar\\cadastro-pets\\src\\files\\formulario.txt";
 
         StringBuilder formularyBd = new StringBuilder();
         List<String> formulary = new ArrayList<>();

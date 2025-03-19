@@ -23,36 +23,40 @@ public class PetService {
                 if (name.equals("")) {
                     name = "NÃO INFORMADO";
 
-                } else if (name.matches(".*\\d.*") == true || name.matches(".*[\\p{P}\\p{S}].*") == true || name.matches(".*\\s.*") == false) {
-                    throw new PetRegisterExceptions("Nome invalido!");
+                } else if (name.matches(".*\\d.*") == true) {
+                    throw new PetRegisterExceptions("O nome não pode conter numeros!");
+                } else if (name.matches(".*[\\p{P}\\p{S}].*") == true) {
+                    throw new PetRegisterExceptions("O nome não pode conter caracteres especiais!");
+                } else if (name.matches(".*\\s.*") == false){
+                    throw new PetRegisterExceptions("Digite um sobrenome!");
                 }
                 //Verifica se o nome possui caracteres especiais ou numeros, e se possui um sobrenome.
 
                 System.out.println(fileManager.formularyRead().get(2).toString());
                 String petType = input.nextLine();
 
-                if (!petType.equals("cachorro") && !petType.equals("gato")) {
+                if (!petType.equalsIgnoreCase("cachorro") && !petType.equalsIgnoreCase("gato")) {
                     throw new PetRegisterExceptions("Tipo de pet invalido!");
                 }
 
-                if (petType.equals("cachorro")) {
+                if (petType.equalsIgnoreCase("cachorro")) {
                     petType = "DOG";
                 }
-                if (petType.equals("gato")) {
+                if (petType.equalsIgnoreCase("gato")) {
                     petType = "CAT";
                 }
 
                 System.out.println(fileManager.formularyRead().get(4).toString());
                 String petSex = input.nextLine();
 
-                if (!petSex.equals("macho") && !petSex.equals("femea")) {
+                if (!petSex.equalsIgnoreCase("macho") && !petSex.equalsIgnoreCase("femea")) {
                     throw new PetRegisterExceptions("Sexo do pet invalido!");
                 }
 
-                if (petSex.equals("macho")) {
+                if (petSex.equalsIgnoreCase("macho")) {
                     petSex = "MALE";
                 }
-                if (petSex.equals("femea")) {
+                if (petSex.equalsIgnoreCase("femea")) {
                     petSex = "FEMALE";
                 }
 
@@ -60,7 +64,9 @@ public class PetService {
                 System.out.println("Numero da casa: ");
                 String petAdress = input.nextLine();
                 System.out.println("Cidade: ");
+                petAdress += ", " + input.nextLine();
                 System.out.println("Rua: ");
+                petAdress += ", " + input.nextLine();
 
                 System.out.println(fileManager.formularyRead().get(8).toString());
                 Double petAge = input.nextDouble();
