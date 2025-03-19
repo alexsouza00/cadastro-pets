@@ -31,9 +31,8 @@ public class Program {
 
             switch (option) {
                 case 1:
-                    fileManager.registerPetsInfo(petRegisterService.register());
                     pets.add(petRegisterService.register());
-
+                    System.out.println("----Pet cadastrado com sucesso!----");
                     menu();
                     break;
                 case 2:

@@ -56,11 +56,11 @@ public class FileManager {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(registerPetsPath))) {
 
             bw.write("1 - " + pet.getName() + "\n");
-            bw.write("2 - " + pet.getPetType() + "\n");
-            bw.write("3 - " + pet.getPetSex() + "\n");
+            bw.write("2 - " + pet.getPetType().getAbout() + "\n");
+            bw.write("3 - " + pet.getPetSex().getAbout() + "\n");
             bw.write("4 - " + pet.getAdress() + "\n");
-            bw.write("5 - " + pet.getAge() + "\n");
-            bw.write("6 - " + pet.getPetWeight() + "\n");
+            bw.write("5 - " + Math.round(pet.getAge()) + ((pet.getAge() < 1) ? " anos" : " meses") + "\n");
+            bw.write("6 - " + pet.getPetWeight() + " Kg" + "\n");
             bw.write("7 - " + pet.getPetBreed() + "\n");
 
         } catch (Exception e) {

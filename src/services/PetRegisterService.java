@@ -25,7 +25,7 @@ public class PetRegisterService {
                     throw new PetRegisterExceptions("O nome não pode conter numeros!");
                 } else if (name.matches(".*[\\p{P}\\p{S}].*") == true) {
                     throw new PetRegisterExceptions("O nome não pode conter caracteres especiais!");
-                } else if (name.matches(".*\\s.*") == false){
+                } else if (name.matches(".*\\s.*") == false) {
                     throw new PetRegisterExceptions("Digite um sobrenome!");
                 }
                 //Verifica se o nome possui caracteres especiais ou numeros, e se possui um sobrenome.
@@ -48,7 +48,7 @@ public class PetRegisterService {
                 String petSex = input.nextLine();
 
                 if (!petSex.equalsIgnoreCase("macho") && !petSex.equalsIgnoreCase("femea")) {
-                    throw new PetRegisterExceptions("Sexo do pet invalido!");
+                    throw new PetRegisterExceptions("Sexo do pet invalido!(informe macho/femea");
                 }
 
                 if (petSex.equalsIgnoreCase("macho")) {
@@ -59,24 +59,25 @@ public class PetRegisterService {
                 }
 
                 System.out.println(fileManager.formularyRead().get(6).toString());
-                System.out.println("Numero da casa: ");
-                String petAdress = input.nextLine();
                 System.out.println("Cidade: ");
-                petAdress += ", " + input.nextLine();
+                String petAdress = "Cidade: " + input.nextLine();
                 System.out.println("Rua: ");
-                petAdress += ", " + input.nextLine();
+                petAdress += ", Rua: " + input.nextLine();
+                System.out.println("Numero da casa: ");
+                petAdress += ", Casa: " + input.nextLine();
 
                 System.out.println(fileManager.formularyRead().get(8).toString());
-                Double petAge = input.nextDouble();
-                input.nextLine();
+                String petAgeString = input.nextLine();
+                Double petAge = Double.valueOf(petAgeString.replaceAll("[^0-9]", ""));
 
                 if (petAge <= 0 || petAge > 20) {
                     throw new PetRegisterExceptions("Idade invalida!");
                 }
 
                 System.out.println(fileManager.formularyRead().get(10).toString());
-                Double petWeight = input.nextDouble();
-                input.nextLine();
+                String petWeightString = input.nextLine();
+                Double petWeight = Double.valueOf(petWeightString.replaceAll("[^0-9]", ""));
+                ;
 
                 if (petWeight < 0.5 || petWeight > 60) {
                     throw new PetRegisterExceptions("Peso invalido!");
@@ -91,7 +92,9 @@ public class PetRegisterService {
                     throw new PetRegisterExceptions("Raça invalida!");
                 }
 
-                return new Pet(name, PetType.valueOf(petType), PetSex.valueOf(petSex), petAdress, petAge, petWeight, petBreed);
+                Pet pet = new Pet(name, PetType.valueOf(petType), PetSex.valueOf(petSex), petAdress, petAge, petWeight, petBreed);
+                fileManager.registerPetsInfo(pet);
+                return pet;
 
             } catch (PetRegisterExceptions e) {
                 System.out.println(e.getMessage());
