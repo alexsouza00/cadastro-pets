@@ -1,6 +1,7 @@
 package application;
 
 import entities.Pet;
+import services.ListPetsService;
 import services.PetRegisterService;
 import utils.FileManager;
 
@@ -11,12 +12,10 @@ public class Program {
     public static Scanner input = new Scanner(System.in);
     public static ArrayList<Pet> pets = new ArrayList<>();
     public static PetRegisterService petRegisterService = new PetRegisterService();
-    public static FileManager fileManager = new FileManager();
+    public static ListPetsService listPetsService = new ListPetsService();
 
     public static void main(String[] args) throws InterruptedException {
-
         menu();
-
     }
 
     public static void menu() throws InterruptedException {
@@ -26,8 +25,9 @@ public class Program {
 
         int option = input.nextInt();
         input.nextLine();
+        boolean exit = false;
 
-        while (true) {
+        while (!exit) {
 
             switch (option) {
                 case 1:
@@ -38,23 +38,27 @@ public class Program {
                 case 2:
                     break;
                 case 3:
-                    if(pets.size() > 0){
-
-                    }
                     break;
                 case 4:
+                    if (pets.isEmpty() == true) {
+                        System.out.println("----Sem pets cadastrados----");
+                    }
+                    else {
+                        listPetsService.listPets(pets);
+                    }
+                    menu();
                     break;
                 case 5:
                     break;
                 case 6:
                     input.close();
+                    exit = true;
                     break;
                 default:
                     System.out.println("Selecione uma opção valida!");
                     Thread.sleep(3000);
                     System.out.println("");
                     System.out.println("-----------------------------");
-                    menu();
             }
         }
 
