@@ -2,8 +2,7 @@ package application;
 
 import entities.Pet;
 import services.ListPetsService;
-import services.PetRegisterService;
-import utils.FileManager;
+import services.RegisterPetService;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -11,10 +10,13 @@ import java.util.Scanner;
 public class Program {
     public static Scanner input = new Scanner(System.in);
     public static ArrayList<Pet> pets = new ArrayList<>();
-    public static PetRegisterService petRegisterService = new PetRegisterService();
+    public static RegisterPetService RegisterPetService = new RegisterPetService();
     public static ListPetsService listPetsService = new ListPetsService();
 
     public static void main(String[] args) throws InterruptedException {
+        System.out.println("Bem viado ao programa");
+        System.out.println("Pressione enter para continuar ");
+        input.nextLine();
         menu();
     }
 
@@ -31,7 +33,7 @@ public class Program {
 
             switch (option) {
                 case 1:
-                    pets.add(petRegisterService.register());
+                    RegisterPetService.register();
                     System.out.println("----Pet cadastrado com sucesso!----");
                     menu();
                     break;
