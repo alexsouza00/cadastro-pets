@@ -1,0 +1,7 @@
+1 - Shake Shake
+2 - Cachorro
+3 - Macho
+4 - Cidade Ocidental, null, null
+5 - 16 anos
+6 - 6.0 Kg
+7 - Vira lata

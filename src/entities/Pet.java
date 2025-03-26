@@ -78,4 +78,15 @@ public class Pet {
     public void setPetBreed(String petBreed) {
         this.petBreed = petBreed;
     }
+
+    @Override
+    public String toString() {
+        return name + " - "
+                + petType.getAbout() + " - "
+                + petSex.getAbout() + " - "
+                + adress + " - "
+                + Math.round(age) + ((age < 1) ? "meses" : " anos") + " - "
+                + petWeight + " - "
+                + petBreed;
+    }
 }

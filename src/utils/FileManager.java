@@ -10,9 +10,12 @@ import java.util.List;
 
 public class FileManager {
 
+    public String savePetsPath = "C:\\javar\\cadastro-pets\\src\\files\\petsCadastrados\\";
+    public String formularyPath = "C:\\javar\\cadastro-pets\\src\\files\\formulario.txt";
+
+
     public List<String> fileReader(String filePath) {
 
-        StringBuilder formularyBd = new StringBuilder();
         List<String> file = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {

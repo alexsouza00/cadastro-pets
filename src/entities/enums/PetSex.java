@@ -3,7 +3,7 @@ package entities.enums;
 public enum PetSex {
 
     MALE("Macho"),
-    FEMALE("Fêmea");
+    FEMALE("Femea");
 
     private String about;
 

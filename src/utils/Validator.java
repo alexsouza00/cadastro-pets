@@ -58,7 +58,7 @@ public class Validator {
 
         try {
 
-            if (!petSex.equalsIgnoreCase("macho") && !petSex.equalsIgnoreCase("femea")) {
+            if (!petSex.equalsIgnoreCase("macho") && !petSex.equalsIgnoreCase("femea") ) {
                 throw new PetRegisterExceptions("Sexo do pet invalido!(informe macho/femea)");
             }
 

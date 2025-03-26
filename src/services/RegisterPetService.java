@@ -8,15 +8,13 @@ import utils.Validator;
 
 import static application.Program.input;
 
-
 public class RegisterPetService {
-
-    String formularyPath = "C:\\javar\\cadastro-pets\\src\\files\\formulario.txt";
-    String savePetsPath = "C:\\javar\\cadastro-pets\\src\\files\\petsCadastrados\\";
 
     public void register() {
         FileManager fileManager = new FileManager();
         Validator validator = new Validator();
+        String formularyPath = fileManager.formularyPath;
+        String savePetsPath = fileManager.savePetsPath;
 
         System.out.println(fileManager.fileReader(formularyPath).get(0).toString());
         String name = validator.validatorName(input.nextLine());
