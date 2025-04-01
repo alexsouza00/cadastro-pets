@@ -9,10 +9,14 @@ import utils.Validator;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static application.Program.input;
+import static application.Program.validator;
 
 public class ListPetsService {
-    ArrayList<Pet> pets;
-
+    ArrayList<Pet> pets = new ArrayList<>();
+    ;
 
     public void getPetsRegistered() {
 
@@ -22,11 +26,10 @@ public class ListPetsService {
         File[] files = petsFolder.listFiles();
 
         try {
-            if (files == null) {
+
+            if (files.length == 0) {
                 throw new RuntimeException("Sem Pets Cadastrados!");
             }
-
-            this.pets = new ArrayList<>();
 
             for (File file : files) {
 
@@ -40,19 +43,94 @@ public class ListPetsService {
                 String petBreed = petInfo.get(6).replaceAll("7 - ", "");
 
                 Pet pet = new Pet(petName, PetType.valueOf(petType), PetSex.valueOf(petSex), adress, petAge, petWeight, petBreed);
-                this.pets.add(pet);
+                pets.add(pet);
+
             }
 
         } catch (RuntimeException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
 
     }
 
     public void listPets() {
+
         getPetsRegistered();
-        for (Pet pet : pets) {
-            System.out.println(pet.toString());
+
+        if (!pets.isEmpty()) {
+            for (Pet pet : pets) {
+                System.out.println(pet.toString());
+            }
+        }
+
+    }
+
+    public void listPetsWithFilter() {
+
+        getPetsRegistered();
+        if (pets.isEmpty() == false) {
+
+            try {
+                System.out.println("Selecione o tipo de animal(Gato, Cachorro)");
+                String petType = validator.petTypeValidator(input.nextLine());
+
+                System.out.println("Selecione os critérios de busca (Nome, Sexo, Idade, Peso, Raca, Endereco): ");
+                String filter1 = input.nextLine();
+
+                System.out.println("Digite o valor para o critério: ");
+                String filterValue1 = input.nextLine();
+
+                System.out.println("Deseja adicionar um segundo critério? (Sim/Não): ");
+                String option = input.nextLine();
+
+                String filter2 = null;
+                String filterValue2 = null;
+
+                if (option.equalsIgnoreCase("Sim")) {
+                    System.out.println("Selecione o segundo critério de busca: ");
+                    filter2 = input.nextLine();
+                    System.out.println("Digite o valor para o segundo critério: ");
+                    filterValue2 = input.nextLine();
+                }
+
+                List<Pet> filteredPets = searchPets(petType, filter1, filterValue1, filter2, filterValue2);
+                if (filteredPets.isEmpty()) {
+                    System.out.println("Nenhum pet encontrado!");
+                } else {
+                    for (Pet pet : filteredPets) {
+                        System.out.println(pet.toString());
+                    }
+                }
+
+            } catch (RuntimeException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
+
+    public List<Pet> searchPets(String petType, String filter1, String filterValue1, String filter2, String filterValue2) {
+        return pets.stream().filter(pet -> pet.getPetType().toString().equals(petType))
+                .filter(pets -> filterByParameter(pets, filter1, filterValue1))
+                .filter(pets -> (filter2 == null || filterByParameter(pets, filter2, filterValue2))).collect(Collectors.toList());
+    }
+
+    public boolean filterByParameter(Pet pet, String filter, String filterValue) {
+        switch (filter.toLowerCase()) {
+            case "nome":
+                return pet.getName().toLowerCase().contains(filterValue.toLowerCase());
+            case "sexo":
+                return pet.getPetSex().toString().contains(filterValue);
+            case "idade":
+                return String.valueOf(pet.getAge()).equals(filterValue);
+            case "peso":
+                return String.valueOf(pet.getPetWeight()).equals(filterValue);
+            case "raca":
+                return pet.getPetBreed().toLowerCase().contains(filterValue.toLowerCase());
+            case "endereco":
+                return pet.getAdress().toLowerCase().contains(filterValue.toLowerCase());
+            default:
+                return false;
+        }
+    }
+
 }

@@ -10,8 +10,8 @@ import java.util.List;
 
 public class FileManager {
 
-    public String savePetsPath = "C:\\javar\\cadastro-pets\\src\\files\\petsCadastrados\\";
-    public String formularyPath = "C:\\javar\\cadastro-pets\\src\\files\\formulario.txt";
+    public String savePetsPath = "C:\\000\\cadastro-pets\\src\\files\\petsCadastrados\\";
+    public String formularyPath = "C:\\000\\cadastro-pets\\src\\files\\formulario.txt";
 
 
     public List<String> fileReader(String filePath) {
@@ -62,4 +62,5 @@ public class FileManager {
             System.out.println("Error " + e.getMessage());
         }
     }
+
 }
