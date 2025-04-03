@@ -40,7 +40,7 @@ public class RegisterPetService {
         String petBreed = validator.petBreedValidator(input.nextLine());
 
         Pet pet = new Pet(name, PetType.valueOf(petType), PetSex.valueOf(petSex), adress, petAge, petWeight, petBreed);
-        fileManager.savePet(savePetsPath, pet);
+        fileManager.savePet(pet);
     }
 }
 

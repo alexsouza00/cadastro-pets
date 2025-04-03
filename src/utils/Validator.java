@@ -144,4 +144,22 @@ public class Validator {
             return petBreedValidator(input.nextLine());
         }
     }
+
+    public int numValidator(String value){
+
+        try{
+            if(value.replaceAll("[^0-9]", "") != "[^0-9]" ){
+                throw new RuntimeException("Digite um numero!");
+            }
+
+            Integer num = Integer.valueOf(value.replaceAll("[^0-9]", ""));
+
+            return num;
+        }
+        catch (RuntimeException e){
+            System.out.println(e.getMessage());
+            System.out.println("Tente novamente!");
+            return numValidator(input.nextLine());
+        }
+    }
 }

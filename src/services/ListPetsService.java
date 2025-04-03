@@ -15,8 +15,8 @@ import static application.Program.input;
 import static application.Program.validator;
 
 public class ListPetsService {
+
     ArrayList<Pet> pets = new ArrayList<>();
-    ;
 
     public void getPetsRegistered() {
 
@@ -30,6 +30,8 @@ public class ListPetsService {
             if (files.length == 0) {
                 throw new RuntimeException("Sem Pets Cadastrados!");
             }
+
+            pets.clear();
 
             for (File file : files) {
 
@@ -74,7 +76,7 @@ public class ListPetsService {
                 System.out.println("Selecione o tipo de animal(Gato, Cachorro)");
                 String petType = validator.petTypeValidator(input.nextLine());
 
-                System.out.println("Selecione os critérios de busca (Nome, Sexo, Idade, Peso, Raca, Endereco): ");
+                System.out.println("Selecione os critérios de busca e): ");
                 String filter1 = input.nextLine();
 
                 System.out.println("Digite o valor para o critério: ");
@@ -93,14 +95,19 @@ public class ListPetsService {
                     filterValue2 = input.nextLine();
                 }
 
-                List<Pet> filteredPets = searchPets(petType, filter1, filterValue1, filter2, filterValue2);
+                List<Pet> filteredPets = new ArrayList<Pet>();
+
+                filteredPets = searchPets(petType, filter1, filterValue1, filter2, filterValue2);
+
                 if (filteredPets.isEmpty()) {
                     System.out.println("Nenhum pet encontrado!");
                 } else {
                     for (Pet pet : filteredPets) {
                         System.out.println(pet.toString());
                     }
+                    filteredPets.clear();
                 }
+
 
             } catch (RuntimeException e) {
                 System.out.println(e.getMessage());

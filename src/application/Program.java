@@ -1,8 +1,10 @@
 package application;
 
 import entities.Pet;
+import services.ChangePetsInfoService;
 import services.ListPetsService;
 import services.RegisterPetService;
+import utils.FileManager;
 import utils.Validator;
 
 import java.util.ArrayList;
@@ -13,10 +15,9 @@ public class Program {
     public static ArrayList<Pet> pets = new ArrayList<>();
     public static RegisterPetService registerPetService = new RegisterPetService();
     public static ListPetsService listPetsService = new ListPetsService();
+    public static ChangePetsInfoService changePetsInfoService = new ChangePetsInfoService();
     public static Validator validator = new Validator();
-
-    String formularyPath = "C:\\javar\\cadastro-pets\\src\\files\\formulario.txt";
-    String savePetsPath = "C:\\javar\\cadastro-pets\\src\\files\\petsCadastrados\\";
+    public static FileManager fileManager = new FileManager();
 
     public static void main(String[] args) throws InterruptedException {
         System.out.println("Bem vindo ao programa");
@@ -46,8 +47,11 @@ public class Program {
                     menu();
                     break;
                 case 2:
+                    changePetsInfoService.changeInfos();
+                    menu();
                     break;
                 case 3:
+
                     break;
                 case 4:
                     listPetsService.listPets();
@@ -67,9 +71,10 @@ public class Program {
                     break;
                 default:
                     System.out.println("Selecione uma opção valida!");
-                    Thread.sleep(3000);
+                    Thread.sleep(1000);
                     System.out.println("");
                     System.out.println("-----------------------------");
+                    menu();
             }
         }
 

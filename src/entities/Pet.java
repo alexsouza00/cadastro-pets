@@ -2,9 +2,11 @@ package entities;
 
 import entities.enums.PetSex;
 import entities.enums.PetType;
+import utils.FileManager;
 
 public class Pet {
 
+    public FileManager fileManager;
     private String name;
     private PetType petType;
     private PetSex petSex;
