@@ -19,6 +19,7 @@ public class Program {
     public static DeletePetService deletePetService = new DeletePetService();
 
     public static void main(String[] args) throws InterruptedException {
+        System.out.println("=====================================");
         System.out.println("Bem vindo ao abrigo Catos e Cachorros");
         System.out.println("Pressione enter para continuar ");
         input.nextLine();
@@ -45,37 +46,48 @@ public class Program {
         while (exit == false) {
             switch (option) {
                 case 1:
+                    System.out.println("");
                     registerPetService.register();
                     System.out.println("----Pet cadastrado com sucesso!----");
+                    System.out.println("");
                     System.out.println("Pressione enter para voltar ao menu");
                     input.nextLine();
                     menu();
                     break;
                 case 2:
+                    System.out.println("");
                     changePetsInfoService.changeInfos();
+                    System.out.println("");
                     System.out.println("Pressione enter para voltar ao menu");
                     input.nextLine();
                     menu();
                     break;
                 case 3:
+                    System.out.println("");
                     deletePetService.deletePet();
+                    System.out.println("");
                     System.out.println("Pressione enter para voltar ao menu");
                     input.nextLine();
                     menu();
                     break;
                 case 4:
+                    System.out.println("");
                     listPetsService.listPets();
+                    System.out.println("");
                     System.out.println("Pressione enter para voltar ao menu");
                     input.nextLine();
                     menu();
                     break;
                 case 5:
+                    System.out.println("");
                     listPetsService.listPetsWithFilter();
+                    System.out.println("");
                     System.out.println("Pressione enter para voltar ao menu");
                     input.nextLine();
                     menu();
                     break;
                 case 6:
+                    System.out.println("");
                     System.out.println("Até a proxima!");
                     System.exit(0);
                     break;

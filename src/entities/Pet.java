@@ -88,7 +88,7 @@ public class Pet {
                 + petSex.getAbout() + " - "
                 + adress + " - "
                 + Math.round(age) + ((age < 1) ? "meses" : " anos") + " - "
-                + petWeight + " - "
+                + petWeight + " Kg " + " - "
                 + petBreed;
     }
 }

@@ -60,7 +60,7 @@ Execute o arquivo Program.java em sua IDE, ou execute no seu terminal:
 1 - Navegue até o diretório src do seu projeto:
 
 ```bash
-cd C:\000\cadastro-pets\src
+cd cadastro-pets\src
 ```
 
 2 - Compile todos os arquivos:
