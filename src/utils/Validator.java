@@ -2,25 +2,26 @@ package utils;
 
 import exceptions.PetRegisterExceptions;
 
-import java.util.Scanner;
-
 import static application.Program.input;
 
 public class Validator {
 
     public String validatorName(String name) {
         try {
-            if (name.equals("")) {
-                return name = "NÃO INFORMADO";
-
-            } else if (name.matches(".*\\d.*") == true) {
-                throw new PetRegisterExceptions("O nome não pode conter numeros!");
-            } else if (name.matches(".*[\\p{P}\\p{S}].*") == true) {
-                throw new PetRegisterExceptions("O nome não pode conter caracteres especiais!");
-            } else if (name.matches(".*\\s.*") == false) {
-                throw new PetRegisterExceptions("Digite um sobrenome!");
+            if (name.isEmpty()) {
+                return "NÃO INFORMADO";
             }
             //Verifica se o nome possui caracteres especiais ou numeros, e se possui um sobrenome.
+            if (name.matches(".*\\d.*")) {
+                throw new PetRegisterExceptions("O nome não pode conter numeros!");
+            }
+            if (name.matches(".*[\\p{P}\\p{S}].*")) {
+                throw new PetRegisterExceptions("O nome não pode conter caracteres especiais!");
+            }
+            if (!name.matches(".*\\s.*")) {
+                throw new PetRegisterExceptions("Digite um sobrenome!");
+            }
+
             return name;
         } catch (PetRegisterExceptions e) {
             System.out.println(e.getMessage());
@@ -58,7 +59,7 @@ public class Validator {
 
         try {
 
-            if (!petSex.equalsIgnoreCase("macho") && !petSex.equalsIgnoreCase("femea") ) {
+            if (!petSex.equalsIgnoreCase("macho") && !petSex.equalsIgnoreCase("femea")) {
                 throw new PetRegisterExceptions("Sexo do pet invalido!(informe macho/femea)");
             }
 
@@ -78,7 +79,7 @@ public class Validator {
         }
     }
 
-    public String adressValidator(String adress) {
+    public String addressValidator(String adress) {
 
         try {
             if (adress.split(",").length < 3) {
@@ -89,20 +90,28 @@ public class Validator {
         } catch (PetRegisterExceptions e) {
             System.out.println(e.getMessage());
             System.out.println("Tente novamente!");
-            return adressValidator(input.nextLine());
+            return addressValidator(input.nextLine());
         }
     }
 
     public Double ageValidator(String age) {
 
         try {
-            Double petAge = Double.valueOf(age.replaceAll("[^0-9]", ""));
+
+            age = age.replaceAll("[^0-9]", "");
+
+            if (age.isEmpty()) {
+                throw new PetRegisterExceptions("Digite um numero valido!");
+            }
+
+            double petAge = Double.parseDouble(age.replaceAll("[^0-9]", ""));
 
             if (petAge <= 0 || petAge > 20) {
                 throw new PetRegisterExceptions("Idade invalida!");
             }
 
             return petAge;
+
         } catch (PetRegisterExceptions e) {
             System.out.println(e.getMessage());
             System.out.println("Tente novamente!");
@@ -113,7 +122,7 @@ public class Validator {
     public Double weightValidator(String weight) {
 
         try {
-            Double petWeight = Double.valueOf(weight.replaceAll("[^0-9]", ""));
+            double petWeight = Double.parseDouble(weight.replaceAll("[^0-9]", ""));
 
             if (petWeight < 0.5 || petWeight > 60) {
                 throw new PetRegisterExceptions("Peso invalido!");
@@ -125,15 +134,16 @@ public class Validator {
             System.out.println("Tente novamente!");
             return weightValidator(input.nextLine());
         }
+
     }
 
     public String petBreedValidator(String petBreed) {
 
         try {
 
-            if (petBreed.equals("")) {
+            if (petBreed.isEmpty()) {
                 petBreed = "NÃO INFORMADO";
-            } else if (petBreed.matches(".*\\d.*") == true || petBreed.matches(".*[\\p{P}\\p{S}].*") == true) {
+            } else if (petBreed.matches(".*\\d.*") || petBreed.matches(".*[\\p{P}\\p{S}].*")) {
                 throw new PetRegisterExceptions("Raça invalida!");
             }
             return petBreed;
@@ -145,21 +155,36 @@ public class Validator {
         }
     }
 
-    public int numValidator(String value){
+    public int numValidator(String value) {
 
-        try{
-            if(value.replaceAll("[^0-9]", "") != "[^0-9]" ){
-                throw new RuntimeException("Digite um numero!");
+        try {
+            if (value.matches("[^0-9]")) {
+                throw new RuntimeException("Digite um numero valido!");
             }
 
-            Integer num = Integer.valueOf(value.replaceAll("[^0-9]", ""));
-
-            return num;
-        }
-        catch (RuntimeException e){
+            return Integer.parseInt(value.replaceAll("[^0-9]", ""));
+        } catch (RuntimeException e) {
             System.out.println(e.getMessage());
             System.out.println("Tente novamente!");
             return numValidator(input.nextLine());
+        }
+    }
+
+    public String optionValidator(String option) {
+        try {
+            if (!option.equalsIgnoreCase("nome")
+                    && !option.equalsIgnoreCase("idade")
+                    && !option.equalsIgnoreCase("peso")
+                    && !option.equalsIgnoreCase("raça")
+                    && !option.equalsIgnoreCase("endereço")) {
+                throw new PetRegisterExceptions("Informe uma opção válida!");
+            }
+
+            return option;
+        } catch (PetRegisterExceptions e) {
+            System.out.println(e.getMessage());
+            System.out.println("Tente novamente!");
+            return optionValidator(input.nextLine());
         }
     }
 }

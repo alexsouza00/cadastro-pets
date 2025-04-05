@@ -1,43 +1,48 @@
 package application;
 
-import entities.Pet;
 import services.ChangePetsInfoService;
+import services.DeletePetService;
 import services.ListPetsService;
 import services.RegisterPetService;
 import utils.FileManager;
 import utils.Validator;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Program {
     public static Scanner input = new Scanner(System.in);
-    public static ArrayList<Pet> pets = new ArrayList<>();
     public static RegisterPetService registerPetService = new RegisterPetService();
     public static ListPetsService listPetsService = new ListPetsService();
     public static ChangePetsInfoService changePetsInfoService = new ChangePetsInfoService();
     public static Validator validator = new Validator();
     public static FileManager fileManager = new FileManager();
+    public static DeletePetService deletePetService = new DeletePetService();
 
     public static void main(String[] args) throws InterruptedException {
-        System.out.println("Bem vindo ao programa");
+        System.out.println("Bem vindo ao abrigo Catos e Cachorros");
         System.out.println("Pressione enter para continuar ");
         input.nextLine();
         menu();
+        input.close();
     }
 
     public static void menu() throws InterruptedException {
 
         System.out.println("=============================");
         System.out.println("Selecione uma opção: ");
-        System.out.println("1 - Cadastrar um novo pet\n" + "2 - Alterar os dados do pet cadastrado\n" + "3 - Deletar um pet cadastrado\n" + "4 - Listar todos os pets cadastrados\n" + "5 - Listar pets por algum critério (idade, nome, raça)\n" + "6 - Sair");
+        System.out.println("""
+                1 - Cadastrar um novo pet
+                2 - Alterar os dados do pet cadastrado
+                3 - Deletar um pet cadastrado
+                4 - Listar todos os pets cadastrados
+                5 - Listar pets por algum critério (idade, nome, raça)
+                6 - Sair""");
 
-        int option = input.nextInt();
-        input.nextLine();
+        int option = validator.numValidator(input.nextLine());
+
         boolean exit = false;
 
-        while (!exit) {
-
+        while (exit == false) {
             switch (option) {
                 case 1:
                     registerPetService.register();
@@ -48,17 +53,22 @@ public class Program {
                     break;
                 case 2:
                     changePetsInfoService.changeInfos();
+                    System.out.println("Pressione enter para voltar ao menu");
+                    input.nextLine();
                     menu();
                     break;
                 case 3:
-
+                    deletePetService.deletePet();
+                    System.out.println("Pressione enter para voltar ao menu");
+                    input.nextLine();
+                    menu();
                     break;
                 case 4:
                     listPetsService.listPets();
                     System.out.println("Pressione enter para voltar ao menu");
                     input.nextLine();
-                menu();
-                break;
+                    menu();
+                    break;
                 case 5:
                     listPetsService.listPetsWithFilter();
                     System.out.println("Pressione enter para voltar ao menu");
@@ -66,14 +76,13 @@ public class Program {
                     menu();
                     break;
                 case 6:
-                    input.close();
-                    exit = true;
+                    System.out.println("Até a proxima!");
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("Selecione uma opção valida!");
-                    Thread.sleep(1000);
-                    System.out.println("");
                     System.out.println("-----------------------------");
+                    Thread.sleep(1500);
                     menu();
             }
         }

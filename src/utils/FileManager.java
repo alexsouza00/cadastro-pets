@@ -1,14 +1,11 @@
 package utils;
 
 import entities.Pet;
-import entities.enums.PetSex;
-import entities.enums.PetType;
 
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class FileManager {
@@ -77,8 +74,7 @@ public class FileManager {
 
             if (fileLines.get(0).contains(petName)) {
                 file.delete();
-               File fileToDelete =  new File(file.getAbsolutePath());
-               fileToDelete.delete();
+
             }
 
 
